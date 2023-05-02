@@ -1,0 +1,270 @@
+﻿@page "/"
+@layout MainLayout
+<body id="page-top">
+    
+    <div id="wrapper">
+        <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
+            <div class="container-fluid d-flex flex-column p-0"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
+                    <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-laugh-wink"></i></div>
+                    <div class="sidebar-brand-text mx-3"><span>DripChip</span></div>
+                </a>
+                <hr class="sidebar-divider my-0">
+                <ul class="navbar-nav text-light" id="accordionSidebar">
+                    <li class="nav-item"><a class="nav-link" href="index.html"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="/profile"><i class="fas fa-user"></i><span>Профиль</span></a></li>
+                    <li class="nav-item"><a class="nav-link active" href="/"><i class="fas fa-table"></i><span>Пользователи</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="/animals"><i class="fas fa-table"></i><span>Животные</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="login.html"><i class="far fa-user-circle"></i><span>Вход</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="register.html"><i class="fas fa-user-circle"></i><span>Регистрация</span></a></li>
+                    <li class="nav-item"></li>
+                </ul>
+                <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
+            </div>
+        </nav>
+        <div class="d-flex flex-column" id="content-wrapper">
+            <div id="content">
+                <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
+                    <div class="container-fluid"><button class="btn btn-link d-md-none rounded-circle me-3" id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button>
+                        <ul class="navbar-nav flex-nowrap ms-auto">
+                            <li class="nav-item dropdown d-sm-none no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><i class="fas fa-search"></i></a>
+                                <div class="dropdown-menu dropdown-menu-end p-3 animated--grow-in" aria-labelledby="searchDropdown">
+                                    <form class="me-auto navbar-search w-100">
+                                        <div class="input-group"><input class="bg-light form-control border-0 small" type="text" placeholder="Search for ...">
+                                            <div class="input-group-append"><button class="btn btn-primary py-0" type="button"><i class="fas fa-search"></i></button></div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown no-arrow mx-1"></li>
+                            <li class="nav-item dropdown no-arrow mx-1">
+                                <div class="shadow dropdown-list dropdown-menu dropdown-menu-end" aria-labelledby="alertsDropdown"></div>
+                            </li>
+                            <div class="d-none d-sm-block topbar-divider"></div>
+                            <li class="nav-item dropdown no-arrow">
+                                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><span class="d-none d-lg-inline me-2 text-gray-600 small">Valerie Luna</span><img class="border rounded-circle img-profile" src="assets/img/avatars/avatar1.jpeg"></a>
+                                    <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in"><a class="dropdown-item" href="#"><i class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Profile</a><a class="dropdown-item" href="#"><i class="fas fa-cogs fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Settings</a><a class="dropdown-item" href="#"><i class="fas fa-list fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Activity log</a>
+                                        <div class="dropdown-divider"></div><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Logout</a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+                <div class="container-fluid">
+                    <h3 class="text-dark mb-4">Team</h3>
+                    <div class="card shadow">
+                        <div class="card-header py-3">
+                            <p class="text-primary m-0 fw-bold">Employee Info</p>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-7 text-nowrap">
+                                    <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable"><label class="form-label">Show&nbsp;<select class="d-inline-block form-select form-select-sm" @bind="@seeItems">
+                                                <option value="10" selected="selected">10</option>
+                                                <option value="25">25</option>
+                                                <option value="50">50</option>
+                                                <option value="100">100</option>
+                                            </select>&nbsp;</label></div>
+                                </div>
+                                <div class="col-md-5">
+                                    <form>
+                                        <div class="form-group row" >
+                                            <label class="col-md-5 col-form-label">Количество записей</label>
+                                            <div class="form-group col-md-7 col-sm-6 col-md-4"><input @bind-value="@size" type="search" class="form-control form-control-sm" aria-controls="dataTable" ></div>
+                                            <label class="col-md-5 col-form-label">Пропуск</label>
+                                            <div class="form-group col-md-7 col-sm-6 col-md-4"><input @bind-value="@from" type="search" class="form-control form-control-sm" aria-controls="dataTable"></div>
+                                        </div>
+                                    </form>
+                                    <div class="form-group col-sm-12">
+                                        <input @bind-value="@name" type="search" class="form-control" aria-controls="dataTable" placeholder="Имя" style="padding-right: 8px;">
+                                        
+                                    </div>
+                                    <div class="form-group col-sm-12">
+                                        <input @bind-value="@LastName" type="search" class="form-control" aria-controls="dataTable" placeholder="Фамилия" style="padding-right: 8px;">
+                                       
+                                    </div>
+                                    <div class="form-group col-sm-12">
+                                        <input @bind-value="@email" type="search" class="form-control" aria-controls="dataTable" placeholder="Email" style="padding-right: 8px;">
+                                       
+                                    </div>
+                                    <button class="btn btn-primary" type="button" @onclick="SearchUsers">Поиск</button>
+                                </div>
+                            </div>
+                            <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
+                                @if (Accounts == null)
+                                {
+                                    <p>По данным критериям записи не найдены</p>
+                                }
+                                else
+                                {
+                                    int counter = 0;
+                                    <table class="table my-0" id="dataTable">
+                                        <thead>
+                                            <tr>
+                                                <th>Имя</th>
+                                                <th>Фамилия</th>
+                                                <th>Почта</th>
+                                            </tr>
+                                        </thead>
+                                        @foreach(var account in Accounts)
+                                        {
+                                            counter++;
+                                            if (counter == seeItems)
+                                            {
+                                                break;
+                                            }
+                                            <tbody>
+                                                <tr>
+                                                    <td>@account.FirstName</td>
+                                                    <td>@account.LastName</td>
+                                                    <td>@account.Email</td>
+                                                </tr>
+                                            </tbody>
+                                        }
+                                        
+                                        <tfoot>
+                                            <tr>
+                                                <td><strong>Имя</strong></td>
+                                                <td><strong>Фамилия</strong></td>
+                                                <td><strong>Почта</strong></td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                }
+                                
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 align-self-center">
+                                    
+                                        @if (Accounts != null)
+                                        {
+                                            @if (size < Accounts.Count())
+                                            {
+                                                <p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite">Отображено от 1 до @seeItems из @size</p>
+                                            }
+                                            else
+                                            {
+                                                <p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite">Отображено от 1 до @seeItems из @Accounts.Count()</p>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            
+                                        }
+                                    
+                                </div>
+                                <div class="col-md-6">
+                                    <nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
+                                        <ul class="pagination">
+                                            <li class="page-item disabled"><a class="page-link" aria-label="Previous" href="#"><span aria-hidden="true">«</span></a></li>
+                                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                            <li class="page-item"><a class="page-link" aria-label="Next" href="#"><span aria-hidden="true">»</span></a></li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="bg-white sticky-footer">
+                <div class="container my-auto">
+                    <div class="text-center my-auto copyright"><span>Copyright © DripChip 2023</span></div>
+                </div>
+            </footer>
+        </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+    </div>
+    
+</body>
+@code {
+    public AccountDTO[]? Accounts;
+    public string? name = null;
+    string? LastName = null;
+    string? email = null;
+    int? from;
+    int? size = 10;
+    int seeItems = 10;
+    protected override async Task OnInitializedAsync()
+    {
+
+        try
+        {
+            // Perform request and process response
+
+            Accounts = await Http.GetFromJsonAsync<AccountDTO[]>($"/accounts/search?firstName={name}&lastName={LastName}&email={email}&from={from}&size={size}");
+            if (Accounts == null || Accounts.Count() == 0)
+            {
+                Accounts = null;
+            }
+        }
+        catch (HttpRequestException ex) when (ex.StatusCode != HttpStatusCode.OK)
+        {
+            var statusCode = ex.StatusCode;
+            Console.WriteLine(ex.Message);
+            // Handle different status codes
+            if (statusCode == HttpStatusCode.NotFound)
+            {
+                // Handle 404 Not Found
+            }
+            else if (statusCode == HttpStatusCode.Unauthorized)
+            {
+                // Handle 401 Unauthorized
+            }
+            else
+            {
+                // Handle other status codes
+            }
+        }
+
+
+
+    }
+    public async Task SearchUsers()
+    {
+        var response = await Http.GetAsync($"/accounts/search?firstName={name}&lastName={LastName}&email={email}&from={from}&size={size}");
+        if (response.StatusCode == HttpStatusCode.OK)
+        {
+            // Handle successful response
+            Accounts = await Http.GetFromJsonAsync<AccountDTO[]>($"/accounts/search?firstName={name}&lastName={LastName}&email={email}&from={from}&size={size}");
+            if(Accounts== null || Accounts.Count() == 0)
+            {
+                Accounts = null;
+            }
+            // ...
+        }
+        else if (response.StatusCode == HttpStatusCode.NoContent)
+        {
+            Accounts = null;
+        }
+        else
+        {
+            // Handle other response codes
+            // ...
+        }
+        //try
+        //{
+        //    // Perform request and process response
+        //    Accounts = await Http.GetFromJsonAsync<AccountDTO[]>($"/accounts/search?firstName={name}&lastName={LastName}&email={email}&from={from}&size={size}");
+        //}
+        //catch (HttpRequestException ex) when (ex.StatusCode != HttpStatusCode.OK)
+        //{
+        //    var statusCode = ex.StatusCode;
+        //    Console.WriteLine(ex.Message);
+        //    // Handle different status codes
+        //    if (statusCode == HttpStatusCode.NotFound)
+        //    {
+        //        // Handle 404 Not Found
+        //    }
+        //    else if (statusCode == HttpStatusCode.Unauthorized)
+        //    {
+        //        // Handle 401 Unauthorized
+        //    }
+        //    else
+        //    {
+        //        // Handle other status codes
+        //    }
+        //}
+    }
+}
