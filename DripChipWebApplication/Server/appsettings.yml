@@ -1,0 +1,2 @@
+﻿ConnectionStrings:
+  SQLiteConnection: Data Source=ApiDB.db; Cache=Shared

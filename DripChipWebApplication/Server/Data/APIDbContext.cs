@@ -1,10 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using DripChipWebApplication.Server.Models;
+using Microsoft.AspNetCore.Connections;
 
 namespace DripChipWebApplication.Server.Data
 {
     public class APIDbContext : DbContext
     {
+ 
+       
         public DbSet<Account> Accounts { get; set; }
         public DbSet<Animal> Animals { get; set; }
         public DbSet<AnimalLocation> Locations { get; set; }
@@ -17,7 +20,8 @@ namespace DripChipWebApplication.Server.Data
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite("Filename=ApiDB.db");
+            string dbFilePath = Path.Combine(Environment.CurrentDirectory, "ApiDB.db");
+            optionsBuilder.UseSqlite($"Data Source = {dbFilePath}");
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

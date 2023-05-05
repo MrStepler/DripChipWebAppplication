@@ -4,15 +4,19 @@ using DripChipWebApplication.Server.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.HttpOverrides;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
+
 builder.Services.AddAuthentication("BasicAuthentication").AddScheme<AuthenticationSchemeOptions, BasicAuthorisation>("BasicAuthentication", null);
+
 builder.Services.AddDbContextFactory<APIDbContext>(o => o.UseSqlite());
+
 builder.Services.AddScoped<IAccountService, AccountsService>();
 builder.Services.AddScoped<IAnimalsService, AnimalsService>();
 builder.Services.AddScoped<IAnimalTypesService, AnimalTypesService>();
@@ -30,10 +34,13 @@ else
 {
     app.UseExceptionHandler("/Error");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
+    //app.UseHsts();
 }
-
-app.UseHttpsRedirection();
+app.UseForwardedHeaders(new ForwardedHeadersOptions
+{
+    ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+});
+//app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseRouting();
 app.UseBlazorFrameworkFiles();

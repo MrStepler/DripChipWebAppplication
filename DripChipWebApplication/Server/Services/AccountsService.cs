@@ -83,7 +83,7 @@ namespace DripChipWebApplication.Server.Services
 
         public AccountDTO[]? SearchAccounts(string? firstName, string? lastName, string? email, int from, int size)
         {
-            using var dbContext = contextFactory.CreateDbContext() ;
+            using var dbContext = contextFactory.CreateDbContext();
             var filteredResult = dbContext.Accounts.AsQueryable();
             if (firstName != null)
             {
