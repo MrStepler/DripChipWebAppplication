@@ -5,17 +5,20 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>DripChipWebApplication</title>
-    <base href="/" />
+
     <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&amp;display=swap">
     <link rel="stylesheet" href="/assets/fonts/fontawesome-all.min.css">
     <link href="manifest.json" rel="manifest" />
     <link rel="apple-touch-icon" sizes="512x512" href="icon-512.png" />
     <link rel="apple-touch-icon" sizes="192x192" href="icon-192.png" />
+    <base href="/" />
 </head>
 
-<body>
-    <div id="app">Loading...</div>
+<body class="bg-gradient-primary" id="page-top">
+    <div id="app">
+    <label class="text-white"> Загрузка приложения...</label>
+    </div>
 
     <!--<div id="blazor-error-ui">
         An unhandled error has occurred.
@@ -23,7 +26,7 @@
         <a class="dismiss">🗙</a>
     </div>-->
     <script src="/_framework/blazor.webassembly.js"></script>
-    <script src="/_framework/aspnetcore-browser-refresh.js"></script>
+    <!--<script src="/_framework/aspnetcore-browser-refresh.js"></script>-->
     <script>navigator.serviceWorker.register('service-worker.js');</script>
     <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="/assets/js/bs-init.js"></script>

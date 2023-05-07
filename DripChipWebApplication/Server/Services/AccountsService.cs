@@ -39,7 +39,7 @@ namespace DripChipWebApplication.Server.Services
                 return guestAccount;
             }
             using var dbContext = contextFactory.CreateDbContext();
-            var account = dbContext.Accounts.SingleOrDefault(x => x.Email == email && x.Password == password);
+            var account = dbContext.Accounts.FirstOrDefault(x => x.Email == email && x.Password == password);
             return account;
         }
 

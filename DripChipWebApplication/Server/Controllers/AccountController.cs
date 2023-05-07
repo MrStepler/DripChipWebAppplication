@@ -18,6 +18,49 @@ namespace DripChipWebApplication.Server.Controllers
             this.accountService = service;
             this.animalsService = animalsService;
         }
+        [Route("authentication")]
+        [HttpGet]
+        public ActionResult<AccountDTO> AuthenticateAccount(string? email, string? password) //Ready
+        {
+
+            if (email == null || password == null)
+            {
+                return NotFound();
+            }
+            if (accountService.GetAccountByEmail(email) != null)
+            {
+                if (accountService.Authenticate(email, password) == null)
+                {
+                    return BadRequest();
+                }
+            }
+            if (accountService.Authenticate(email, password) == null)
+            {
+                return NotFound();
+            }
+            if (accountService.Authenticate(email, password).Email == "guest")
+            {
+                return NotFound(); 
+            }
+            
+            return Ok(accountService.Authenticate(email, password));
+        }
+        [Route("account/{email}")]
+        [HttpGet]
+        public ActionResult<AccountDTO> GetAccountByEmail(string? email) //Ready
+        {
+
+            if (email == null)
+            {
+                return BadRequest();
+            }
+            if (accountService.GetAccountByEmail(email) == null)
+            {
+                return StatusCode(404);
+            }
+            return Ok(accountService.GetAccountByEmail(email));
+        }
+
         [Route("accounts/{id}")]
         [HttpGet]
         public ActionResult<AccountDTO> GetAccountById(int? id) //Ready
